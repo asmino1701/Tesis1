@@ -11,7 +11,7 @@ const constraints = {
 
 var chat = $.connection.chatHub;
 var context = canvas.getContext('2d');
-var imagen;
+var imagenwc;
 // Access webcam
 async function init() {
     try {
@@ -33,12 +33,60 @@ function handleSuccess(stream) {
 init();
 
 // Draw image
+//snap.addEventListener("click", function (e) {
+//    e.preventDefault();
+//    context.drawImage(video, 0, 0, 640, 480);
+//    var imagenwc = canvas.toDataURL();
 
-snap.addEventListener("click", function () {
+//    imagenwc = imagenwc.replace(/^data:image\/(png|jpg);base64,/, "")
+//    document.getElementById("hdImage").value = imagenwc;
+//    var json = '{ "imageData" : "' + imagenwc + '" }';
+
+//    // Sending the image data to Server
+//    $.ajax({
+//        type: 'POST',
+//        url: 'Index.aspx/ImagenCls',
+//        data: json,
+//        contentType: "application/json; charset=utf-8",
+//        dataType: "json",
+//        success: function (msg) {
+//            alert("Done, Picture Uploaded.");
+//        },
+//        error: function (jqXHR, textStatus, errorThrown) {
+//            console.log(errorThrown);
+//        }
+//    });
+
+//    //enviarImagen(imagen);
+//});
+
+function EnviarImagen() {
     context.drawImage(video, 0, 0, 640, 480);
-    imagen = canvas.toDataURL();
-    enviarImagen(imagen);
-});
+    imagenwc = canvas.toDataURL();
+
+    imagenwc = imagenwc.replace(/^data:image\/(png|jpg);base64,/, "");
+    var json = '{ "imageData" : "' + imagenwc + '" }';
+
+    // Sending the image data to Server
+    $.ajax({
+        type: 'POST',
+        url: 'Index.aspx/ImagenCls',
+        data: json,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (msg) {
+            alert("Done, Picture Uploaded.");
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+var temporizador;
+function f1() {
+    temporizador = setTimeout("callitrept()", 5000);
+}
 
 //SIGNAL R
 function enviarImagen(img) {

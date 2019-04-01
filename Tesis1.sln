@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tesis1", "Tesis1\Tesis1.csproj", "{C98E114D-363B-4C84-8FF7-6AC0913F987D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capa Datos", "Capa Datos", "{C15754C0-10DA-4BDC-ACE0-629A18913293}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Capa Negocio", "Capa Negocio", "{6F62AA6A-1FDC-4F3A-8E10-71109243E406}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imagen", "Imagen\Imagen.csproj", "{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +21,16 @@ Global
 		{C98E114D-363B-4C84-8FF7-6AC0913F987D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C98E114D-363B-4C84-8FF7-6AC0913F987D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C98E114D-363B-4C84-8FF7-6AC0913F987D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A225D03-6ECC-47C7-8733-FDD55CAD0EA2} = {6F62AA6A-1FDC-4F3A-8E10-71109243E406}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8F575D52-395C-45BB-B95F-C931D7A4D37D}
