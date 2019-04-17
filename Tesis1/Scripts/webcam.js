@@ -1,10 +1,4 @@
 ﻿//Variables globales
-var chat = $.connection.chatHub;
-var context = canvas.getContext('2d');
-var imagenwc;
-var json;
-var temporizador;
-
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const snap = document.getElementById("snap");
@@ -15,6 +9,12 @@ const constraints = {
         height: 720
     }
 };
+
+var chat = $.connection.chatHub;
+var context = canvas.getContext('2d');
+var imagenwc;
+var json;
+var temporizador;
 
 // Acceder a la webcam
 async function init() {
@@ -71,17 +71,17 @@ function CapturarFrame() {
 
     imagenwc = imagenwc.replace(/^data:image\/(png|jpg);base64,/, "");
     json = '{ "imageData" : "' + imagenwc + '" }';
-    EnviarImagen();
+    EnviarImagen(json);
 }
 
 //Funcion para enviar la imagen al servidor
-function EnviarImagen() {
+function EnviarImagen(datos) {
     
     // Sending the image data to Server
     $.ajax({
         type: 'POST',
         url: 'Index.aspx/ImagenCls',
-        data: json,
+        data: datos,
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (msg) {

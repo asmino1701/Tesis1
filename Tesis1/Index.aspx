@@ -8,21 +8,70 @@
     <title></title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="/Content/web.css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return false">
-        <div id="container">
+        <%--<div id="container">
             <!-- Stream video via webcam -->
-            <div class="video-wrap">
-                <video class="videoElement" id="video" playsinline autoplay></video>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="video-wrap">
+                        <video class="videoElement" id="video" playsinline autoplay></video>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Configuraciones</legend>
+                        <div>
+                            <div>Objetos</div>
+                            <div ></div>
+                        </div>
+                        <div>
+                            <div class="col-md-6">Correo:</div>
+                            <div class="col-md-6"><input type="text"/></div>
+                        </div>
+                    </fieldset>
+                    <button value="submit"/>
+                </div>
             </div>
 
+
             <div class="btn-primary">
-                <button id="snap" onclick="EnviarImagen()">Capture</button>
+                <button id="snap" onclick="EnviarImagen()" style="display: none">Capture</button>
             </div>
 
             <!-- Webcam video snapshot -->
-            <canvas id="canvas" width="640" height="480"></canvas>
+            <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
+        </div>--%>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <video class="videoElement" id="video" playsinline autoplay></video>
+                </div>
+                <div class="col-md-6">
+                    <fieldset>
+                        <legend>Configuraciones</legend>
+                        <div>
+                            <div>Objetos</div>
+                            <div></div>
+                        </div>
+                        <div>
+                            <div class="col-md-6">Correo:</div>
+                            <div class="col-md-6">
+                                <input type="text" /></div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="btn-primary">
+                <button id="snap" onclick="EnviarImagen()" style="display: none">Capture</button>
+            </div>
+
+            <!-- Webcam video snapshot -->
+            <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
         </div>
     </form>
     <!--Script references. -->
@@ -36,8 +85,8 @@
     <script type="text/javascript" src="/Scripts/webcam.js"></script>
     <script>
         //Timer para capturar frames cada 6 segundos
-        window.setInterval(function () {            
-            EnviarImagen();
+        window.setInterval(function () {
+            CapturarFrame();
         }, 6000);
     </script>
 </body>
