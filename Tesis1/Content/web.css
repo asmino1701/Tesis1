@@ -1,6 +1,6 @@
 ﻿
 .videoElement {
-    width: 500px;
-    height: 375px;
+    width: 100%;
+    height: auto;
     background-color: #666;
 }
