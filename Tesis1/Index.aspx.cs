@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
+using System.IO;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
-using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
-using Imagen;
 
 namespace Tesis1
 {
@@ -18,20 +13,14 @@ namespace Tesis1
         {
 
         }
-        
+
 
         [WebMethod]
         public static void ImagenCls(string imageData)
         {
-            Prediccion clsPrediccion = new Prediccion();
-
             byte[] data = Convert.FromBase64String(imageData);
-            //byte[] data = GetImageAsByteArray(imageData);
-            clsPrediccion.MakePredictionRequest(data).Wait();
-
+            
         }
-
-        
 
     }
 }

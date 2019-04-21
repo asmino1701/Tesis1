@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="btn-primary">
-                <button id="snap" onclick="CapturarFrame();" style="">Capture</button>
+                <button id="snap" onclick="EnviarImagen()" style="display: none">Capture</button>
             </div>
 
             <!-- Webcam video snapshot -->
@@ -84,11 +84,10 @@
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript" src="/Scripts/webcam.js"></script>
     <script>
-        
         //Timer para capturar frames cada 6 segundos
-        //window.setInterval(function () {
-        //    CapturarFrame();
-        //}, 6000);
+        window.setInterval(function () {
+            CapturarFrame();
+        }, 6000);
     </script>
 </body>
 </html>
