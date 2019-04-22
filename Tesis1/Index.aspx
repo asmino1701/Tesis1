@@ -85,9 +85,10 @@
     <script type="text/javascript" src="/Scripts/webcam.js"></script>
     <script>
         //Timer para capturar frames cada 6 segundos
-        window.setInterval(function () {
-            CapturarFrame();
-        }, 6000);
+        CapturarFrame();
+        //window.setInterval(function () {
+        //    
+        //}, 6000);
     </script>
 </body>
 </html>
