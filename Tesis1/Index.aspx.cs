@@ -1,6 +1,5 @@
 ﻿using System;
-using System.IO;
-using System.Web;
+using System.Diagnostics;
 using System.Web.Script.Services;
 using System.Web.Services;
 using Imagen;
@@ -21,7 +20,9 @@ namespace Tesis1
         {
             Prediccion clsPrediccion = new Prediccion();
             byte[] data = Convert.FromBase64String(imageData);
-            clsPrediccion.MakePredictionRequest(data).Wait();
+            //byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(imageData));
+            clsPrediccion.MakePredictionRequestAsync(data);
+            Console.ReadKey();
         }
 
     }

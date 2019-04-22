@@ -14,38 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return false">
-        <%--<div id="container">
-            <!-- Stream video via webcam -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="video-wrap">
-                        <video class="videoElement" id="video" playsinline autoplay></video>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <fieldset>
-                        <legend>Configuraciones</legend>
-                        <div>
-                            <div>Objetos</div>
-                            <div ></div>
-                        </div>
-                        <div>
-                            <div class="col-md-6">Correo:</div>
-                            <div class="col-md-6"><input type="text"/></div>
-                        </div>
-                    </fieldset>
-                    <button value="submit"/>
-                </div>
-            </div>
-
-
-            <div class="btn-primary">
-                <button id="snap" onclick="EnviarImagen()" style="display: none">Capture</button>
-            </div>
-
-            <!-- Webcam video snapshot -->
-            <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
-        </div>--%>
+        
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -67,7 +36,7 @@
                 </div>
             </div>
             <div class="btn-primary">
-                <button id="snap" onclick="EnviarImagen()" style="display: none">Capture</button>
+                <button id="snap" onclick="CapturarFrame()" style="">Capture</button>
             </div>
 
             <!-- Webcam video snapshot -->
