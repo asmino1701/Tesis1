@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -12,8 +13,7 @@ namespace Tesis1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
+        }        
 
         [WebMethod]
         public static void ImagenCls(string imageData)
@@ -21,7 +21,7 @@ namespace Tesis1
             Prediccion clsPrediccion = new Prediccion();
             byte[] data = Convert.FromBase64String(imageData);
             //byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(imageData));
-            clsPrediccion.MakePredictionRequestAsync(data);
+            clsPrediccion.MakePredictionRequestAsync(data).Wait();
             Console.ReadKey();
         }
 
