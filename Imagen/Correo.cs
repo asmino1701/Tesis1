@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Mail;
 
 namespace Imagen
@@ -42,23 +43,19 @@ namespace Imagen
 
 
                 client.Send(message);
-                sMessage = "Email sent.";
+                sMessage = "Correo enviado.";
             }
             catch (Exception ex)
             {
                 sMessage = "Coudn't send the message!\n " + ex.Message;
-                Console.WriteLine("Error al enviar " + sMessage);
+                Debug.WriteLine("Error al enviar el correo" + sMessage);
                 //throw;
             }
             finally
             {
-                Console.WriteLine("Holaa final ");
+                Debug.WriteLine("Holaa final ");
             }
         }
 
-        private static bool RedirectionUrlValidationCallback(string redirectionUrl)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
