@@ -14,7 +14,7 @@
 </head>
 <body>
     <form id="form1" runat="server" onsubmit="return false">
-        
+        <div class="Title"><h1>Bienvenidos al portal</h1></div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -22,21 +22,33 @@
                 </div>
                 <div class="col-md-6">
                     <fieldset>
-                        <legend>Configuraciones</legend>
+                        <legend><h2>Configuraciones</h2></legend>
                         <div>
-                            <div>Objetos</div>
-                            <div></div>
+                            <div class="titulo">
+                                <h3>Objetos</h3>
+                            </div>
+                            <div class="check">
+                                <asp:CheckBox ID="CbxCasco" runat="server" Text="Casco" />
+                                <br />
+                                <asp:CheckBox ID="CbxChaleco" runat="server" Text="Chaleco" />
+                            </div>
                         </div>
                         <div>
-                            <div class="col-md-6">Correo:</div>
-                            <div class="col-md-6">
-                                <input type="text" /></div>
+                            <div class="titulo">
+                                <h3>Correo:</h3>
+                            </div>
+                            <div class="">
+                                <asp:TextBox ID="TxtCorreo" runat="server"></asp:TextBox>
+                            </div>
+                        </div>
+                        <div style="padding-top:5px;">
+                            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" class="btn-primary" OnClick="BtnGuardar_Click"/>
                         </div>
                     </fieldset>
                 </div>
             </div>
-            <div class="btn-primary">
-                <button id="snap" onclick="CapturarFrame()" style="">Capture</button>
+            <div >
+                <button class="btn-primary" id="snap" onclick="CapturarFrame()" style="">Capture</button>
             </div>
 
             <!-- Webcam video snapshot -->

@@ -1,28 +1,26 @@
-﻿using RestSharp;
+﻿using Imagen.Modelos;
+using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Diagnostics;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Imagen.Modelos;
-using System;
-using System.Collections.ObjectModel;
 
 namespace Imagen
 {
     public class Prediccion
-    {        
+    {
         Correo enviar = new Correo();
-        private ObservableCollection<MdPredicciones> _posts;
+        public MdPredicciones account = new MdPredicciones();
+        public Prediction resPredicciones = new Prediction();
+        byte[] imagen;
         public async Task<MdPredicciones> MakePredictionRequestAsync(byte[] imageFilePath)
         {
             string predicciones;
-            MdPredicciones account = new MdPredicciones();
-            
+            imagen = imageFilePath;
+
             try
             {
-                
                 HttpContent content = new ByteArrayContent(imageFilePath);
                 var client = new RestClient("https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/a64cecf1-d2ce-4dca-b48a-e133c2665cc5/detect/iterations/Iteration8/image");
                 var request = new RestRequest(Method.POST);
@@ -40,11 +38,12 @@ namespace Imagen
                 IRestResponse response = client.Execute(request);
                 Debug.WriteLine(response.Content);
                 predicciones = response.Content;
-                account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);               
-                Debug.WriteLine(_posts);
-                return account;
+                account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);
+
+                Debug.WriteLine(account.predictions);
+                return account.predictions;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }

@@ -1,6 +1,29 @@
 ﻿
+body{
+    background-color:lightgrey !important;
+}
+
 .videoElement {
     width: 100%;
     height: auto;
     background-color: #666;
+}
+
+h2{
+    margin:0px;
+}
+
+.titulo{
+    padding-left:0px !important;
+    color:darkblue;
+}
+
+.check{
+    padding-left:5px;
+}
+
+.Title{
+    text-align:center;
+    background-color:darkblue;
+    color:white;
 }
