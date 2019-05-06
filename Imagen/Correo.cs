@@ -4,15 +4,15 @@ using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
 
+
 namespace Imagen
 {
     public class Correo
     {
-        public void EnviarCorreo(byte[] imagen)
+        public void EnviarCorreo(byte[] imagen, string destinatario)
         {
             string sMessage;
-            MailMessage message = new MailMessage();
-
+            MailMessage message = new MailMessage();            
             try
             {
 
@@ -30,7 +30,7 @@ namespace Imagen
                 message.BodyEncoding = System.Text.Encoding.UTF8;
                 message.Subject = "Alerta! Posible falla de seguridad.";
                 message.SubjectEncoding = System.Text.Encoding.UTF8;
-                message.To.Add("andresmino1701@gmail.com");
+                message.To.Add(destinatario);
                 ContentType ct = new ContentType(MediaTypeNames.Image.Jpeg);
                 //ct.MediaType = MediaTypeNames.Text.Plain;
                 ct.Name = "img_" + DateTime.Now.ToString() + ".jpeg";

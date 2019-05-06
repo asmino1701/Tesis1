@@ -37,7 +37,7 @@
                             <div class="titulo">
                                 <h3>Correo:</h3>
                             </div>
-                            <div class="">
+                            <div >
                                 <asp:TextBox ID="TxtCorreo" runat="server"></asp:TextBox>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
         //Timer para capturar frames cada 6 segundos
         CapturarFrame();
         //window.setInterval(function () {
-        //    
-        //}, 6000);
+        //    CapturarFrame();
+        //}, 300000);
     </script>
 </body>
 </html>

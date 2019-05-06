@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using RestSharp;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace Imagen
     {
         Correo enviar = new Correo();
         public MdPredicciones account = new MdPredicciones();
-        public Prediction resPredicciones = new Prediction();
+        public static List<Prediction> resPredicciones = new List<Prediction>();
         byte[] imagen;
-        public async Task<MdPredicciones> MakePredictionRequestAsync(byte[] imageFilePath)
+        public async Task<List<Prediction>> MakePredictionRequestAsync(byte[] imageFilePath)
         {
             string predicciones;
             imagen = imageFilePath;
@@ -39,20 +40,20 @@ namespace Imagen
                 Debug.WriteLine(response.Content);
                 predicciones = response.Content;
                 account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);
-
+                resPredicciones = account.predictions;
                 Debug.WriteLine(account.predictions);
                 
                 //enviar.EnviarCorreo(imageFilePath);
-                return account;
+                return account.predictions;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
-            return account;
+            return account.predictions;
 
         }
 
-
+        
     }
 }

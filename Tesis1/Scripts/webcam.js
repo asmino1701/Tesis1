@@ -2,6 +2,7 @@
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const snap = document.getElementById("snap");
+
 const constraints = {
     audio: true,
     video: {
@@ -39,6 +40,9 @@ init();
 
 //Funcion para capturar la imagen desde el streaming
 function CapturarFrame() {
+    var correo = document.getElementById('<%=TxtCorreo.ClientID%>');
+    alert(correo.value); 
+    
     context.drawImage(video, 0, 0, 640, 480);
     imagenwc = canvas.toDataURL();
 
