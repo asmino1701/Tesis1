@@ -41,7 +41,9 @@ namespace Imagen
                 account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);
 
                 Debug.WriteLine(account.predictions);
-                return account.predictions;
+                
+                //enviar.EnviarCorreo(imageFilePath);
+                return account;
             }
             catch (Exception ex)
             {

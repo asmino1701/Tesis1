@@ -6,6 +6,7 @@ using System.Web.Script.Services;
 using System.Web.Services;
 using Imagen;
 
+
 namespace Tesis1
 {
     [ScriptService]
@@ -24,8 +25,9 @@ namespace Tesis1
             
             byte[] data = Convert.FromBase64String(imageData);
             //byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(imageData));
-            resultados = clsPrediccion.MakePredictionRequestAsync(data).Wait();
-            
+            clsPrediccion.MakePredictionRequestAsync(data).Wait();
+            //resultados = clsPrediccion.account.predictions;            
+
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
