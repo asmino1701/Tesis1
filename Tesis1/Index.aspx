@@ -81,11 +81,11 @@
         function ValidateEmail() {
             var textbox = document.getElementById('<%= TxtCorreo.ClientID %>');
             var email = textbox.value;
+            //window.setInterval(function () {
             CapturarFrame(email);
+            //}, 300000);
         }
-        //Timer para capturar frames cada 6 segundos
-        //var textbox = document.getElementById('<%= TxtCorreo.ClientID %>');
-
+      
         //window.setInterval(function () {
         //    CapturarFrame();
         //}, 300000);
