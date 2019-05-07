@@ -29,10 +29,11 @@ namespace Tesis1
         [WebMethod]
         public static void ImagenCls(string imageData)
         {
+            bool validacionCorreo;
             byte[] data = Convert.FromBase64String(imageData);
             Predicciones(data).Wait();
-
         }
+
         public static async Task Predicciones(byte[] data)
         {
             var contObj1 = 0;
@@ -45,7 +46,7 @@ namespace Tesis1
             {
                 cont++;
                 Debug.WriteLine(respuesta);
-                if (respuesta.probability >= 0.60)
+                if (respuesta.probability >= 0.10)
                 {
                     resultadosFiltrados.Add(respuesta);
                     switch (respuesta.tagName.ToString())
@@ -62,39 +63,36 @@ namespace Tesis1
                         default:
                             break;
                     }
-                    //Comparo si ya acabó de recorrer los resultados
-                    if (cont == resultados.Count)
+                                        
+                    
+                }
+                //Comparo si ya acabó de recorrer los resultados
+                if (cont == resultados.Count)
+                {
+                    //Comparo qué checkboxes están activos para validar la información
+                    if (cascos && !chalecos)//si se selecciona casco
                     {
-                        //Comparo qué checkboxes están activos para validar la información
-                        if (cascos && !chalecos)//si se selecciona casco
+                        if (contObj1 != contPersona)
                         {
-                            if (contObj1 != contPersona)
-                            {
-                                //Envío el correo de alerta
-                                enviar.EnviarCorreo(data, correo);
-                            }
-                        }
-                        else if (chalecos && !cascos)//si se selecciona chaleco
-                        {
-                            if (contObj2 != contPersona)
-                            {
-                                //Envío el correo de alerta
-                                enviar.EnviarCorreo(data, correo);
-                            }
-                        }
-                        else if (cascos && chalecos)//si se selecciona casco y chaleco
-                        {
-                            if (((contObj1 != contPersona) && (contObj2 != contPersona)) || ((contObj1 == contPersona) && (contObj2 != contPersona)) || ((contObj1 != contPersona) && (contObj2 == contPersona)))
-                            {
-                                //Envío el correo de alerta
-                                enviar.EnviarCorreo(data, correo);
-                            }
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, correo);
                         }
                     }
-
-                    else if (respuesta.tagName == "casco")
+                    else if (chalecos && !cascos)//si se selecciona chaleco
                     {
-
+                        if (contObj2 != contPersona)
+                        {
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, correo);
+                        }
+                    }
+                    else if (cascos && chalecos)//si se selecciona casco y chaleco
+                    {
+                        if (((contObj1 != contPersona) && (contObj2 != contPersona)) || ((contObj1 == contPersona) && (contObj2 != contPersona)) || ((contObj1 != contPersona) && (contObj2 == contPersona)))
+                        {
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, correo);
+                        }
                     }
                 }
             }

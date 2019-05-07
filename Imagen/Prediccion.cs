@@ -44,12 +44,12 @@ namespace Imagen
                 Debug.WriteLine(account.predictions);
                 
                 //enviar.EnviarCorreo(imageFilePath);
-                return account.predictions;
+                //return account.predictions;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-            }
+            }            
             return account.predictions;
 
         }

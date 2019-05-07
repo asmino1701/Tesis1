@@ -13,8 +13,10 @@
     <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" onsubmit="return false">
-        <div class="Title"><h1>Bienvenidos al portal</h1></div>
+    <form id="form1" runat="server" >
+        <div class="Title">
+            <h1>Bienvenidos al portal</h1>
+        </div>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
@@ -22,7 +24,9 @@
                 </div>
                 <div class="col-md-6">
                     <fieldset>
-                        <legend><h2>Configuraciones</h2></legend>
+                        <legend>
+                            <h2>Configuraciones</h2>
+                        </legend>
                         <div>
                             <div class="titulo">
                                 <h3>Objetos</h3>
@@ -37,18 +41,27 @@
                             <div class="titulo">
                                 <h3>Correo:</h3>
                             </div>
-                            <div >
+                            <div>
                                 <asp:TextBox ID="TxtCorreo" runat="server"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                    ControlToValidate="TxtCorreo" ErrorMessage="Email is required"
+                                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                    ErrorMessage="Invalid Email" ControlToValidate="TxtCorreo"
+                                    SetFocusOnError="True"
+                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                                </asp:RegularExpressionValidator>
                             </div>
                         </div>
-                        <div style="padding-top:5px;">
-                            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" class="btn-primary" OnClick="BtnGuardar_Click"/>
+                        <div style="padding-top: 5px;">
+                            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" class="btn-primary" OnClick="BtnGuardar_Click" />
                         </div>
                     </fieldset>
                 </div>
             </div>
-            <div >
-                <button class="btn-primary" id="snap" onclick="CapturarFrame()" style="">Capture</button>
+            <div>
+                <button class="btn-primary" id="snap" onclick="ValidateEmail()" style="">Capture</button>
             </div>
 
             <!-- Webcam video snapshot -->
@@ -64,9 +77,15 @@
     <script src="signalr/hubs"></script>
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript" src="/Scripts/webcam.js"></script>
-    <script>
+    <script type="text/javascript">
+        function ValidateEmail() {
+            var textbox = document.getElementById('<%= TxtCorreo.ClientID %>');
+            var email = textbox.value;
+            CapturarFrame(email);
+        }
         //Timer para capturar frames cada 6 segundos
-        CapturarFrame();
+        //var textbox = document.getElementById('<%= TxtCorreo.ClientID %>');
+
         //window.setInterval(function () {
         //    CapturarFrame();
         //}, 300000);

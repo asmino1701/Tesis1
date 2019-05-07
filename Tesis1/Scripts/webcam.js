@@ -2,6 +2,7 @@
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const snap = document.getElementById("snap");
+const textbox = document.getElementById("<%=TxtCorreo.ClientID%>");
 
 const constraints = {
     audio: true,
@@ -37,18 +38,25 @@ function handleSuccess(stream) {
 // Load init
 init();
 
-
 //Funcion para capturar la imagen desde el streaming
-function CapturarFrame() {
-    var correo = document.getElementById('<%=TxtCorreo.ClientID%>');
-    alert(correo.value); 
-    
-    context.drawImage(video, 0, 0, 640, 480);
-    imagenwc = canvas.toDataURL();
+function CapturarFrame(email) {
 
-    imagenwc = imagenwc.replace(/^data:image\/(png|jpg);base64,/, "");
-    json = '{ "imageData" : "' + imagenwc + '" }';
-    EnviarImagen(json);
+    if (validateEmail(email)) {
+        context.drawImage(video, 0, 0, 640, 480);
+        imagenwc = canvas.toDataURL();
+        imagenwc = imagenwc.replace(/^data:image\/(png|jpg);base64,/, "");
+        json = '{ "imageData" : "' + imagenwc + '" }';
+        EnviarImagen(json);
+    }
+    //else {
+    //    alert("Ingrese un correo");
+    //}
+
+}
+//Validacion de correo
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
 }
 
 //Funcion para enviar la imagen al servidor
@@ -69,3 +77,5 @@ function EnviarImagen(datos) {
         }
     });
 }
+
+
