@@ -25,15 +25,22 @@ namespace Tesis1
 
         }
 
-
+        /// <summary>
+        /// Recibo la imagen del lado del cliente
+        /// </summary>
+        /// <param name="imageData"></param>
         [WebMethod]
         public static void ImagenCls(string imageData)
-        {
-            bool validacionCorreo;
+        {            
             byte[] data = Convert.FromBase64String(imageData);
             Predicciones(data).Wait();
         }
 
+        /// <summary>
+        /// Evaluo los resultados obtenidos del servicio
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static async Task Predicciones(byte[] data)
         {
             var contObj1 = 0;
@@ -46,7 +53,7 @@ namespace Tesis1
             {
                 cont++;
                 Debug.WriteLine(respuesta);
-                if (respuesta.probability >= 0.10)
+                if (respuesta.probability >= 0.60)
                 {
                     resultadosFiltrados.Add(respuesta);
                     switch (respuesta.tagName.ToString())
@@ -98,6 +105,11 @@ namespace Tesis1
             }
         }
 
+        /// <summary>
+        /// Guardo la información seleccionada en la página
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             //Almaceno el correo ingresado al que se requiere realizar el envío de las notificaciones
