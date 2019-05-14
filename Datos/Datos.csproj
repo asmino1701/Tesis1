@@ -8,13 +8,8 @@
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.4.0" />
-    <PackageReference Include="Microsoft.Exchange.WebServices" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="RestSharp" Version="106.6.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DatosConexion\DatosConexion.csproj" />
   </ItemGroup>
 
 </Project>

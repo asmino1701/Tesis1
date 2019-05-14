@@ -6,16 +6,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DatosConexion;
+
 
 namespace Imagen
 {
     public class Prediccion
     {
-        Correo enviar = new Correo();
-        public MdPredicciones account = new MdPredicciones();
-        public static List<Prediction> resPredicciones = new List<Prediction>();
-        byte[] imagen;
-        public async Task<List<Prediction>> MakePredictionRequestAsync(byte[] imageFilePath)
+        static Correo enviar = new Correo();
+        public static MdPredicciones account = new MdPredicciones();
+        public static List<Prediction> resPredicciones = new List<Prediction>();        
+        static List<Prediction> resultados = new List<Prediction>();
+        static List<Prediction> resultadosFiltrados = new List<Prediction>();
+        static byte[] imagen;
+        public static string correo = "";
+        public static async Task<List<Prediction>> MakePredictionRequestAsync(byte[] imageFilePath)
         {
             string predicciones;
             imagen = imageFilePath;
@@ -54,6 +59,76 @@ namespace Imagen
 
         }
 
-        
+        /// <summary>
+        /// Evaluo los resultados obtenidos del servicio
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static async Task Predicciones(byte[] data, string email, bool casco, bool chaleco)
+        {
+            var contObj1 = 0;
+            var contObj2 = 0;
+            var contPersona = 0;
+            var cont = 0;
+            resultados = await MakePredictionRequestAsync(data);
+            Debug.WriteLine(resultados);
+            foreach (Prediction respuesta in resultados)
+            {
+                cont++;
+                Debug.WriteLine(respuesta);
+                if (respuesta.probability >= 0.60)
+                {
+                    resultadosFiltrados.Add(respuesta);
+                    switch (respuesta.tagName.ToString())
+                    {
+                        case "casco":
+                            contObj1++;
+                            break;
+                        case "chaleco":
+                            contObj2++;
+                            break;
+                        case "persona":
+                            contPersona++;
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                }
+                //Comparo si ya acabó de recorrer los resultados
+                if (cont == resultados.Count)
+                {
+                    var output = JsonConvert.SerializeObject(resultadosFiltrados);                    
+                    //Comparo qué checkboxes están activos para validar la información
+                    if (casco && !chaleco)//si se selecciona casco
+                    {
+                        if (contObj1 != contPersona)
+                        {
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, email);
+                            Conexion.GuardarDatos(output, data);
+                        }
+                    }
+                    else if (chaleco && !casco)//si se selecciona chaleco
+                    {
+                        if (contObj2 != contPersona)
+                        {
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, email);
+                        }
+                    }
+                    else if (casco && chaleco)//si se selecciona casco y chaleco
+                    {
+                        if (((contObj1 != contPersona) && (contObj2 != contPersona)) || ((contObj1 == contPersona) && (contObj2 != contPersona)) || ((contObj1 != contPersona) && (contObj2 == contPersona)))
+                        {
+                            //Envío el correo de alerta
+                            enviar.EnviarCorreo(data, email);
+                        }
+                    }
+                }
+            }
+        }
+
     }
 }
