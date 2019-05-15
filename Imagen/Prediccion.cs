@@ -99,7 +99,7 @@ namespace Imagen
                 //Comparo si ya acabó de recorrer los resultados
                 if (cont == resultados.Count)
                 {
-                    var output = JsonConvert.SerializeObject(resultadosFiltrados);                    
+                    var output = JsonConvert.SerializeObject(resultados);                    
                     //Comparo qué checkboxes están activos para validar la información
                     if (casco && !chaleco)//si se selecciona casco
                     {
@@ -116,6 +116,7 @@ namespace Imagen
                         {
                             //Envío el correo de alerta
                             enviar.EnviarCorreo(data, email);
+                            Conexion.GuardarDatos(output, data);
                         }
                     }
                     else if (casco && chaleco)//si se selecciona casco y chaleco
@@ -124,6 +125,7 @@ namespace Imagen
                         {
                             //Envío el correo de alerta
                             enviar.EnviarCorreo(data, email);
+                            Conexion.GuardarDatos(output, data);
                         }
                     }
                 }
