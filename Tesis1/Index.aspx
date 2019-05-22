@@ -13,8 +13,8 @@
     <script src="Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server" >
-        <div class="Title">
+    <form id="form1" runat="server">
+        <div class="typewriter Title">
             <h1>Bienvenidos al portal</h1>
         </div>
         <div class="container-fluid">
@@ -23,49 +23,52 @@
                     <video class="videoElement" id="video" playsinline autoplay></video>
                 </div>
                 <div class="col-md-6">
-                    <fieldset>
-                        <legend>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
                             <h2>Configuraciones</h2>
-                        </legend>
-                        <div>
-                            <div class="titulo">
-                                <h3>Objetos</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <h3 class="card-subtitle">Objetos:</h3>
                             </div>
                             <div class="check">
                                 <asp:CheckBox ID="CbxCasco" runat="server" Text="Casco" />
                                 <br />
                                 <asp:CheckBox ID="CbxChaleco" runat="server" Text="Chaleco" />
                             </div>
-                        </div>
-                        <div>
-                            <div class="titulo">
-                                <h3>Correo:</h3>
-                            </div>
                             <div>
-                                <asp:TextBox ID="TxtCorreo" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                    ControlToValidate="TxtCorreo" ErrorMessage="Email is required"
-                                    SetFocusOnError="True"></asp:RequiredFieldValidator>
+                                <div class="card-subtitle">
+                                    <h3 class="card-subtitle">Correo:<span style="color: red;"> *</span></h3>
+                                </div>
+                                <div>
+                                    <asp:TextBox ID="TxtCorreo" runat="server" placeholder="Ingrese un correo para recibir las alertas de seguridad" CssClass="form-control"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
+                                        ControlToValidate="TxtCorreo" ErrorMessage="Se requiere un correo electrónico."
+                                        ForeColor="Red" SetFocusOnError="True">
+                                    </asp:RequiredFieldValidator>
 
-                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                    ErrorMessage="Invalid Email" ControlToValidate="TxtCorreo"
-                                    SetFocusOnError="True"
-                                    ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
-                                </asp:RegularExpressionValidator>
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
+                                        ErrorMessage="Formato de correo inválido." ControlToValidate="TxtCorreo"
+                                        SetFocusOnError="True" ForeColor="Red"
+                                        ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*">
+                                    </asp:RegularExpressionValidator>
+                                </div>
+                            </div>
+                            <div style="padding-top: 5px;">
+                                <span>Por favor, ingrese un correo para comenzar.</span>
+                                <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" class="btn btn-primary boton" OnClick="BtnGuardar_Click" />
                             </div>
                         </div>
-                        <div style="padding-top: 5px;">
-                            <asp:Button ID="BtnGuardar" runat="server" Text="Guardar" class="btn-primary" OnClick="BtnGuardar_Click" />
-                        </div>
-                    </fieldset>
+                    </div>
                 </div>
             </div>
-            <div>
-                <button class="btn-primary" id="snap" onclick="ValidateEmail()" style="">Capture</button>
-            </div>
+        </div>
+        <div>
+            <button class="btn-primary" id="snap" onclick="ValidateEmail()" style="">Capture</button>
+        </div>
 
-            <!-- Webcam video snapshot -->
-            <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
+        <!-- Webcam video snapshot -->
+        <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
         </div>
     </form>
     <!--Script references. -->
@@ -85,7 +88,7 @@
             CapturarFrame(email);
             //}, 300000);
         }
-      
+
         //window.setInterval(function () {
         //    CapturarFrame();
         //}, 300000);
