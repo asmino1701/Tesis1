@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-
 
 namespace Imagen
 {
@@ -25,7 +25,12 @@ namespace Imagen
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 message.From = fromCorreo;
-                message.Body = "Se ha encontrado alguna incoherencia entre objetos y personas. Por favor verifique y, de ser el caso, tome las medidas correctivas.";
+                message.IsBodyHtml = true;
+                using (StreamReader reader = File.OpenText(@"C:/Users/AndrésMiño/Documents/GitHub/Tesis1/Tesis1/Correo.html"))
+                {
+                    message.Body = reader.ReadToEnd();
+                }
+                //message.Body = "Se ha encontrado alguna incoherencia entre objetos y personas. Por favor verifique y, de ser el caso, tome las medidas correctivas.";
                 message.BodyEncoding = System.Text.Encoding.UTF8;
                 message.Subject = "Alerta! Posible falla de seguridad.";
                 message.SubjectEncoding = System.Text.Encoding.UTF8;
