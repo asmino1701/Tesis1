@@ -19,22 +19,22 @@ namespace DatosConexion
                 var masterKey = "cyH0VdFWruvk6NWe61tmddJh5FyPGeu0oTcairDIQipDwnZOQIn48OcI0Y7iClrkR3IQZoZZwjnSEwV4blBgeg==";
                 using (var client = new DocumentClient(new Uri(endpoint), masterKey))
                 {
-                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creating Database <<<<<<<<<<<<<<<<<<<");
+                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creando la base de datos si no existe <<<<<<<<<<<<<<<<<<<");
                     // Create new database Object  
                     //Id defines name of the database  
                     var databaseDefinition = new Database { Id = "Tesis1" };
                     var database = await client.CreateDatabaseIfNotExistsAsync(databaseDefinition);
-                    Debug.WriteLine("Database testDb created successfully");
+                    Debug.WriteLine("Base de datos creada");
 
                     //Create new database collection  
-                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creating Collection <<<<<<<<<<<<<<<<<<<");
+                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creando colección <<<<<<<<<<<<<<<<<<<");
                     var collectionDefinition = new DocumentCollection { Id = "Tesis1_Resources" };
                     var collection = await client.CreateDocumentCollectionIfNotExistsAsync(UriFactory.CreateDatabaseUri("Tesis1"),
                         collectionDefinition);
-                    Debug.WriteLine("Collection Tesis1_Resources created successfully");
+                    Debug.WriteLine("Colección creada correctamente");
 
                     //Insert new Document  
-                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creating Document <<<<<<<<<<<<<<<<<<<");
+                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Creando documento <<<<<<<<<<<<<<<<<<<");
                     dynamic doc1Definition = new
                     {
                         resultados = account,
@@ -44,7 +44,7 @@ namespace DatosConexion
                     var document1 = await client.CreateDocumentAsync(
                         UriFactory.CreateDocumentCollectionUri("Tesis1", "Tesis1_Resources"),
                         doc1Definition);
-                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Document Created <<<<<<<<<<<<<<<<<<<");
+                    Debug.WriteLine("\r\n>>>>>>>>>>>>>>>> Documento creado <<<<<<<<<<<<<<<<<<<");
                 }
 
             }).Wait();

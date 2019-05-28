@@ -68,8 +68,7 @@
         </div>
 
         <!-- Webcam video snapshot -->
-        <canvas id="canvas" width="640" height="480" style="display: none"></canvas>
-        </div>
+        <canvas id="canvas" width="640" height="480" style="display: none"></canvas>        
     </form>
     <!--Script references. -->
     <!--Reference the jQuery library. -->
@@ -81,17 +80,16 @@
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript" src="/Scripts/webcam.js"></script>
     <script type="text/javascript">
+        window.onload = ValidateEmail();
+
         function ValidateEmail() {
             var textbox = document.getElementById('<%= TxtCorreo.ClientID %>');
             var email = textbox.value;
             //window.setInterval(function () {
             CapturarFrame(email);
-            //}, 300000);
+            //}, 30000);
         }
 
-        //window.setInterval(function () {
-        //    CapturarFrame();
-        //}, 300000);
     </script>
 </body>
 </html>

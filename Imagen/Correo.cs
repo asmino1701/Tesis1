@@ -21,8 +21,7 @@ namespace Imagen
                 client.EnableSsl = true;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new NetworkCredential("andresmino1701@hotmail.com", "pijthhpfdsobvxyf");
-                MailAddress fromCorreo = new MailAddress("andresmino1701@hotmail.com", "Admin de Alertas");
-                // MailAddress to = new MailAddress("juan.loachamin@grupobusiness.it,sofia.chavez@grupobusiness.it");
+                MailAddress fromCorreo = new MailAddress("andresmino1701@hotmail.com", "Admin de Alertas");                
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                 message.From = fromCorreo;
@@ -31,11 +30,9 @@ namespace Imagen
                 message.Subject = "Alerta! Posible falla de seguridad.";
                 message.SubjectEncoding = System.Text.Encoding.UTF8;
                 message.To.Add(destinatario);
-                ContentType ct = new ContentType(MediaTypeNames.Image.Jpeg);
-                //ct.MediaType = MediaTypeNames.Text.Plain;
+                ContentType ct = new ContentType(MediaTypeNames.Image.Jpeg);                
                 ct.Name = "img_" + DateTime.Now.ToString() + ".jpeg";
-                Attachment attach = new Attachment(new System.IO.MemoryStream(imagen), ct);
-                //Attachment attach = new Attachment(@"C:\Users\AndrésMiño\Pictures\nuevos.png");
+                Attachment attach = new Attachment(new System.IO.MemoryStream(imagen), ct);                
 
                 message.Attachments.Add(attach);
 

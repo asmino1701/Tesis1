@@ -14,8 +14,7 @@ namespace Imagen
     public class Prediccion
     {
         static Correo enviar = new Correo();
-        public static MdPredicciones account = new MdPredicciones();
-        public static List<Prediction> resPredicciones = new List<Prediction>();        
+        public static MdPredicciones account = new MdPredicciones();                
         static List<Prediction> resultados = new List<Prediction>();
         static List<Prediction> resultadosFiltrados = new List<Prediction>();
         static byte[] imagen;
@@ -44,8 +43,7 @@ namespace Imagen
                 IRestResponse response = client.Execute(request);
                 Debug.WriteLine(response.Content);
                 predicciones = response.Content;
-                account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);
-                resPredicciones = account.predictions;
+                account = JsonConvert.DeserializeObject<MdPredicciones>(predicciones);                
                 Debug.WriteLine(account.predictions);
                 
                 //enviar.EnviarCorreo(imageFilePath);
@@ -93,7 +91,6 @@ namespace Imagen
                         default:
                             break;
                     }
-
 
                 }
                 //Comparo si ya acabó de recorrer los resultados
