@@ -27,7 +27,7 @@ namespace Imagen
             try
             {
                 HttpContent content = new ByteArrayContent(imageFilePath);
-                var client = new RestClient("https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/a64cecf1-d2ce-4dca-b48a-e133c2665cc5/detect/iterations/Iteration8/image");
+                var client = new RestClient("https://southcentralus.api.cognitive.microsoft.com/customvision/v3.0/Prediction/a64cecf1-d2ce-4dca-b48a-e133c2665cc5/detect/iterations/Iteration10/url");
                 var request = new RestRequest(Method.POST);
                 request.AddHeader("content-type", "application/octet-stream");
                 request.AddHeader("prediction-key", "99ae86db5b3046ae92c4ff77f27ccc78");
